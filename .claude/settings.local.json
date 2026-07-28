@@ -20,7 +20,8 @@
       "Bash(git push *)",
       "Bash(gh auth *)",
       "Bash(git ls-remote *)",
-      "Bash(echo \"STATUS:$?\")"
+      "Bash(echo \"STATUS:$?\")",
+      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Corrige chave da API com espacos/quebras de linha e melhora log de erro\")"
     ]
   }
 }
