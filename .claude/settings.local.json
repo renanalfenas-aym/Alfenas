@@ -21,7 +21,9 @@
       "Bash(gh auth *)",
       "Bash(git ls-remote *)",
       "Bash(echo \"STATUS:$?\")",
-      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Corrige chave da API com espacos/quebras de linha e melhora log de erro\")"
+      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Corrige chave da API com espacos/quebras de linha e melhora log de erro\")",
+      "Bash(git fetch *)",
+      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Ativa cache de prompt para reduzir custo por mensagem\")"
     ]
   }
 }
