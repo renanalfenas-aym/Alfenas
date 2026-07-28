@@ -32,7 +32,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 4000,
-        system: SYSTEM_PROMPT,
+        system: [
+          { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }
+        ],
         messages: messages.map(m => ({ role: m.role, content: m.content }))
       })
     });
@@ -43,6 +45,8 @@ export default async function handler(req, res) {
       res.status(upstream.status).json({ error: data?.error?.message || 'Erro na API da Anthropic.' });
       return;
     }
+
+    console.log('usage:', data.usage);
 
     const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
     const reply = textBlocks.join('\n') || 'Nao consegui responder agora, tenta de novo.';
