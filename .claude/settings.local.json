@@ -13,7 +13,14 @@
       "Bash(grep -c '\\\\${' \"/Users/renanalfenas/Desktop/Projetos Claude/AYM/api/_systemPrompt.js\")",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Projeto inicial AYM: front-end Vite/React + proxy serverless para Anthropic\")"
+      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Projeto inicial AYM: front-end Vite/React + proxy serverless para Anthropic\")",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(gh auth *)",
+      "Bash(git ls-remote *)",
+      "Bash(echo \"STATUS:$?\")"
     ]
   }
 }
