@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -n '4,845p' \"/Users/renanalfenas/Downloads/AYM_chat_2.jsx\")",
+      "Bash(sed -i '' '1s/^const AYM_SYSTEM_PROMPT = /export const SYSTEM_PROMPT = /' /tmp/prompt_extract.txt)",
+      "Read(//tmp/**)",
+      "Bash(cp /tmp/prompt_extract.txt \"/Users/renanalfenas/Desktop/Projetos Claude/AYM/api/_systemPrompt.js\")",
+      "Bash(rm /tmp/prompt_extract.txt)",
+      "Bash(npm install *)",
+      "Bash(command -v brew)",
+      "Bash(git --version)",
+      "Bash(grep -n '\\\\${' \"/Users/renanalfenas/Desktop/Projetos Claude/AYM/api/_systemPrompt.js\")",
+      "Bash(grep -c '\\\\${' \"/Users/renanalfenas/Desktop/Projetos Claude/AYM/api/_systemPrompt.js\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.name=\"Renan Alfenas\" -c user.email=\"renan.alfenas@gmail.com\" commit -q -m \"Projeto inicial AYM: front-end Vite/React + proxy serverless para Anthropic\")"
+    ]
+  }
+}
