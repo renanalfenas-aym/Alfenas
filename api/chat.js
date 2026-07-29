@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 4000,
+        max_tokens: 8000,
         system: [
           { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }
         ],
@@ -55,10 +55,15 @@ export default async function handler(req, res) {
       return;
     }
 
-    console.log('usage:', data.usage);
+    console.log('usage:', data.usage, 'stop_reason:', data.stop_reason);
 
     const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
-    const reply = textBlocks.join('\n') || 'Nao consegui responder agora, tenta de novo.';
+    let reply = textBlocks.join('\n');
+    if (!reply) {
+      reply = data.stop_reason === 'max_tokens'
+        ? 'Essa simulacao ficou grande demais pra eu terminar de uma vez. Tenta pedir em partes menores (ex: primeiro o calculo da parcela, depois o do investimento).'
+        : 'Nao consegui responder agora, tenta de novo.';
+    }
 
     res.status(200).json({ reply });
   } catch (err) {
