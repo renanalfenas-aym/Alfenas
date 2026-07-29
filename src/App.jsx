@@ -110,6 +110,48 @@ export default function AYMChat() {
   const scrollRef = useRef(null);
   const recognitionRef = useRef(null);
 
+  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [unlocked, setUnlocked] = useState(false);
+  const [savedPassword, setSavedPassword] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loggingIn, setLoggingIn] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('aym_password');
+    if (stored) {
+      setSavedPassword(stored);
+      setUnlocked(true);
+    }
+    setCheckingAuth(false);
+  }, []);
+
+  const handleLogin = async () => {
+    const pwd = passwordInput.trim();
+    if (!pwd || loggingIn) return;
+    setLoggingIn(true);
+    setLoginError('');
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd })
+      });
+      const data = await response.json();
+      if (response.ok && data.ok) {
+        localStorage.setItem('aym_password', pwd);
+        setSavedPassword(pwd);
+        setUnlocked(true);
+      } else {
+        setLoginError('Senha incorreta. Tenta de novo.');
+      }
+    } catch (err) {
+      setLoginError('Deu um erro de conexao aqui. Tenta de novo em um instante.');
+    } finally {
+      setLoggingIn(false);
+    }
+  };
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -167,11 +209,21 @@ export default function AYMChat() {
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-app-password': savedPassword
+        },
         body: JSON.stringify({
           messages: newMessages.map(m => ({ role: m.role, content: m.content }))
         })
       });
+      if (response.status === 401) {
+        localStorage.removeItem('aym_password');
+        setSavedPassword('');
+        setUnlocked(false);
+        setLoading(false);
+        return;
+      }
       if (!response.ok) throw new Error('request failed');
       const data = await response.json();
       const reply = data.reply || 'Nao consegui responder agora, tenta de novo.';
@@ -184,6 +236,106 @@ export default function AYMChat() {
   };
 
   // Enter NUNCA envia (so quebra linha). O envio acontece exclusivamente pelo clique no botao.
+
+  if (checkingAuth) {
+    return <div style={{ minHeight: '100vh', background: '#F6F3ED' }} />;
+  }
+
+  if (!unlocked) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: '#F6F3ED',
+        fontFamily: "'Inter', -apple-system, sans-serif",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px 16px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '380px' }}>
+          <div style={{
+            background: '#16233F',
+            borderRadius: '14px',
+            padding: '24px',
+            textAlign: 'center',
+            boxShadow: '0 8px 24px rgba(22,35,63,0.18)'
+          }}>
+            <img
+              src={FOTO_GERENTE}
+              alt="Gerente"
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '10px',
+                objectFit: 'cover',
+                border: '2px solid #C9974C',
+                marginBottom: '12px'
+              }}
+            />
+            <div style={{
+              fontFamily: "'Fraunces', Georgia, serif",
+              fontSize: '20px',
+              fontWeight: 600,
+              color: '#F6F3ED'
+            }}>
+              AYM &middot; Ask Your Manager
+            </div>
+            <div style={{ fontSize: '12.5px', color: '#C9974C', marginTop: '4px' }}>
+              Acesso restrito &middot; Alfenas Consultoria
+            </div>
+          </div>
+
+          <div style={{
+            background: '#FFFFFF',
+            borderRadius: '14px',
+            marginTop: '16px',
+            border: '1px solid #E7E1D5',
+            padding: '20px'
+          }}>
+            <label style={{ fontSize: '13px', color: '#20242B', fontWeight: 500 }}>Senha de acesso</label>
+            <input
+              type="password"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+              placeholder="Digite a senha do mes"
+              style={{
+                width: '100%',
+                marginTop: '8px',
+                border: '1px solid #E2DDD0',
+                borderRadius: '10px',
+                padding: '10px 12px',
+                fontSize: '14.5px',
+                outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+            {loginError && (
+              <div style={{ fontSize: '12.5px', color: '#C0392B', marginTop: '8px' }}>{loginError}</div>
+            )}
+            <button
+              onClick={handleLogin}
+              disabled={loggingIn || !passwordInput.trim()}
+              style={{
+                width: '100%',
+                marginTop: '14px',
+                background: loggingIn || !passwordInput.trim() ? '#D9D2C2' : '#C9974C',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '11px',
+                fontSize: '14.5px',
+                fontWeight: 600,
+                color: '#16233F',
+                cursor: loggingIn || !passwordInput.trim() ? 'default' : 'pointer'
+              }}
+            >
+              {loggingIn ? 'Entrando...' : 'Entrar'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{

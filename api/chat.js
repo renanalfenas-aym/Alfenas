@@ -15,6 +15,15 @@ export default async function handler(req, res) {
     return;
   }
 
+  const appPassword = (process.env.APP_PASSWORD || '').trim();
+  if (appPassword) {
+    const providedPassword = req.headers['x-app-password'];
+    if (providedPassword !== appPassword) {
+      res.status(401).json({ error: 'Senha invalida ou expirada.' });
+      return;
+    }
+  }
+
   const { messages } = req.body || {};
   if (!Array.isArray(messages) || messages.length === 0) {
     res.status(400).json({ error: 'messages e obrigatorio.' });
