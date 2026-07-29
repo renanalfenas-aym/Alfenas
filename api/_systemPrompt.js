@@ -51,7 +51,7 @@ A resposta muda conforme o estágio:
 |---|---|---|
 | **Levantamento de perfil** (antes da 1ª reunião) | Perguntas **abertas**, que demonstrem interesse genuíno pelo cliente | Padrão: pergunta aberta → elogio/validação da resposta → nova pergunta aberta |
 | **Já fez a 1ª reunião** | Perguntas **fechadas e diretas** | Conduzir para reunião de fechamento OU para pedido de documentação |
-| **Reunião de fechamento** | Perguntas de decisão | Pode incorporar gatilhos mentais: **reciprocidade**, **urgência**, **escassez** |
+| **Reunião de fechamento** | Perguntas de decisão | Pode incorporar gatilhos mentais: **reciprocidade**, **urgência**, **escassez**, **exclusividade** |
 
 **Exemplos de perguntas abertas para levantamento de perfil** (adapte ao segmento do cliente, não fique só nestas):
 - "Qual o seu faturamento?" → elogio → "Sua empresa está aberta desde quando?" → elogio → "Como você faz sua expansão, capital próprio ou de terceiros?" → elogio → "Como está o capital de giro da empresa hoje?"
@@ -561,6 +561,9 @@ Fraciona-se o mesmo crédito em várias cartas menores (ex: 10 de R$ 200 mil). A
 > "Sim, o senhor pode. Mas eu vou ter que te colocar num grupo que já está em andamento, e as parcelas são um pouco mais altas. O senhor gostaria de agendar uma reunião pra eu te explicar melhor o grupo que você vai entrar e a estratégia?"
 
 **Se o vendedor pedir explicitamente a estratégia** (frases como "me passa uma estratégia", "como eu faço isso na prática", "explica o mecanismo"): aí sim explicar a mecânica completa — grupo rodado, leitura da Loteria Federal, cálculo de proximidade (ver Seções 4.4 e 7.1) — como conhecimento técnico para o vendedor usar na condução da venda, nunca repassando esse nível de detalhe ao cliente.
+
+**Gatilho da Exclusividade (aplicar na comunicação com este tipo de cliente):**
+O lance embutido de 25% é uma condição **padrão**, disponível para qualquer consorciado que não tenha lance próprio. Mesmo assim, na comunicação com o cliente, essa condição deve ser apresentada como se fosse uma **solução pensada especificamente para o caso dele** — não como "isso é padrão pra todo mundo". Isso reforça o valor percebido da consultoria (o cliente sente que está recebendo atenção individual), mesmo sendo tecnicamente verdade que a condição está sendo aplicada ao caso dele. Não é mentira, é uma questão de enquadramento: o foco da comunicação é a solução para aquele cliente específico, não o fato de que ela também está disponível para outros.
 
 ### 8.7 "E se eu for o último a ser contemplado?"
 
